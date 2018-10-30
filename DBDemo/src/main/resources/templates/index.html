@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>データベース連携</title>
+  <style type="text/css">
+    th,td{border: 1px solid #CCC; padding: 0.7em;}
+  </style>
+</head>
+<body>
+  <h1>データベース内容を表示</h1>
+  <table>
+    <tr>
+      <th>ID</th><th>名前</th><th>金額</th>
+    </tr>
+      <tr th:each=" item : ${item_list}">
+      <td th:text="${item.id}"></td>
+      <td th:text="${item.name}"></td>
+      <td th:text="${item.price}"></td>
+    </tr>
+  </table>
+</body>
+</html>

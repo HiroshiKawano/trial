@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>データベースのレコードを修正する</title>
+  <style type="text/css">
+  th,td{border: 1px solid #CCC; padding: 0.7em;}
+</style>
+</head>
+<body>
+  <h1>データベースのレコード修正</h1>
+  <h2>レコードの登録</h2>
+  <form th:action="@{/insert}">
+  <table>
+  <tr><th>ID</th><th>名前</th><th>金額</th></tr>
+  <tr>
+    <td><input type="text" name="id" /></td>
+    <td><input type="text" name="name" /></td>
+    <td><input type="text" name="price" /></td>
+  </tr>
+  <tr><td colspan="3"><input type="submit" value="登録" /></td></tr>
+  </table>
+</form>
+  <h2>レコードの編集および削除</h2>
+  <table>
+  <tr>
+    <th>ID</th><th>名前</th><th>金額</th><th>操作</th>
+  </tr>
+  <tr th:each=" item : ${item_list}">
+    <td th:text="${item.id}"></td>
+    <td th:text="${item.name}"></td>
+    <td th:text="${item.price}"></td>
+    <td>
+      <a th:href="@{/delete(id=${item.id})}">削除</a>
+      <a th:href="@{/update_select(id=${item.id})}">編集</a>
+    </td>
+  </tr>
+  </table>
+
+</body>
+</html>

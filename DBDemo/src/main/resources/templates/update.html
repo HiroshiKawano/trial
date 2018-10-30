@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>データベース連携</title>
+  <style type="text/css">
+  th,td{border: 1px solid #CCC; padding: 0.7em;}
+  </style>
+</head>
+<body>
+  <h1>データベース内容を変更</h1>
+  <form th:action="@{/update}">
+  <input type="hidden" name="id" th:value="${item.id}" /> //hidden非表示
+  <table>
+    <tr>
+      <th>ID</th><th>名前</th><th>金額</th>
+    </tr>
+    <tr>
+      <td th:text="${item.id}"></td>
+      <td><input type="text" name="name" th:value="${item.name}"></td>
+      <td><input type="text" name="price" th:value="${item.price}"></td>
+    </tr>
+    <tr>
+      <td colspan="3"><input type="submit" value="更新" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

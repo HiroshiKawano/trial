@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -77,10 +80,21 @@ public class DBTestController {
     @ModelAttribute(value="item") Item item,
     Model model) {
     List<Item> item_list = repository.findByNameLikeOrderByIdAsc ("%ス%");
-    //List<Item> item_list =
-    // repository.findByPriceGreaterThanAndPriceLessThanOrderByPriceAsc(5000, 20000);
-    //List<Item> item_list = repository.myQuery("%ス%");
+  //List<Item> item_list = repository.findByPriceGreaterThanAndPriceLessThanOrderByPriceAsc(5000, 20000);
+  //List<Item> item_list = repository.myQuery("%ス%");
     model.addAttribute("item_list",item_list);
     return "index";
     }
+
+    @Autowired PagerService page_service;
+    @RequestMapping(value="item_list")
+    public String pageList(
+            @PageableDefault(page = 0, size= 2) Pageable pageable,
+            Model model) {
+        Page<Item> page = page_service.getAllPager(pageable);
+        model.addAttribute("page", page);
+        model.addAttribute("item_list", page.getContent());
+        return "index";
+    }
+
 }
